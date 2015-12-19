@@ -67,7 +67,7 @@ class test_picross(unittest.TestCase):
     def show(self,image):
         image+=1
         image*=0.5
-        cv2.imshow("picross",cv2.resize(image,(400,400)))
+        cv2.imshow("picross",cv2.resize(image,(400,400), interpolation = cv2.INTER_AREA))
         cv2.waitKey(0)
 
     def setUp(self):
@@ -100,12 +100,12 @@ class test_picross(unittest.TestCase):
 
     def test_third_line_returns_a_set_of_slices(self):
         line=[np.ones(1),np.array((1,1,1,0,1,1)),np.ones(4),np.array((1,1,0,0)),np.ones(1)]
-        print self.Picross.rows[2]
         slices=self.Picross.get_slices(self.picross[2])
         nptest.assert_array_equal(line[0],slices[0])
         nptest.assert_array_equal(line[1],slices[1])
         nptest.assert_array_equal(line[2],slices[2])
         nptest.assert_array_equal(line[3],slices[3])
         nptest.assert_array_equal(line[4],slices[4])
+        self.show(self.picross)
 
 
